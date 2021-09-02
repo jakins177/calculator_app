@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="borderlessButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="borderlessButtonStyle">@style/Widget.AppCompat.Button.Borderless</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.Button</item>
+    </style>
+
+</resources>
