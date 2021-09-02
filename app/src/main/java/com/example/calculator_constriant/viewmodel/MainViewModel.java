@@ -46,11 +46,11 @@ public class MainViewModel extends ViewModel {
     public void processInput(String input) {
 
 
-        final boolean isANumber = input == "0" || input == "1" || input == "2" || input == "3" || input == "4" || input == "5"
-                || input == "6" || input == "7" || input == "8" || input == "9";
+        final boolean isANumber = input.equals("0") || input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5")
+                || input.equals("6") || input.equals("7") || input.equals("8") || input.equals("9");
 
 
-        if (currentOperator == "" || isANumber || input == ".") {
+        if (currentOperator.equals("") || isANumber || input.equals(".")) {
             if (resultShowing) {
                 displayString.setValue("");
                 resultShowing = false;
@@ -59,11 +59,11 @@ public class MainViewModel extends ViewModel {
             updateDisplay(input);
         }
 
-        if (isAfterOp == false) {
-            if (input == "+" || input == "-" || input == "x" || input == "÷") {
+        if (!isAfterOp) {
+            if (input.equals("+") || input.equals("-") || input.equals("x") || input.equals("÷")) {
                 setAfterOp(true);
                 setOperator(input);
-            } else if (isANumber || input == ".") {
+            } else if (isANumber || input.equals(".")) {
 
                 setBeforeOpValue(getBeforeOpValue() + input);
 
@@ -71,12 +71,12 @@ public class MainViewModel extends ViewModel {
 
             }
         } else {
-            if (isANumber || input == ".") {
+            if (isANumber || input.equals(".")) {
                 setAfterOpValue(getAfterOpValue() + input);
                 Log.d(MSG_TAG, "getAfterOpValue is: " + getAfterOpValue());
-            } else if (input == "=") {
+            } else if (input.equals("=")) {
 
-                if (currentOperator == "+") {
+                if (currentOperator.equals("+")) {
 
                     BigDecimal numOne = new BigDecimal(getBeforeOpValue());
                     BigDecimal numTwo = new BigDecimal(getAfterOpValue());
@@ -86,7 +86,7 @@ public class MainViewModel extends ViewModel {
                     displayString.setValue("");
                     updateDisplay(result.toString());
                     resetForNextCalc();
-                } else if (currentOperator == "-") {
+                } else if (currentOperator.equals("-")) {
                     BigDecimal numOne = new BigDecimal(getBeforeOpValue());
                     BigDecimal numTwo = new BigDecimal(getAfterOpValue());
 
@@ -95,7 +95,7 @@ public class MainViewModel extends ViewModel {
                     displayString.setValue("");
                     updateDisplay(result.toString());
                     resetForNextCalc();
-                } else if (currentOperator == "÷") {
+                } else if (currentOperator.equals("÷")) {
                     BigDecimal numOne = new BigDecimal(getBeforeOpValue());
                     BigDecimal numTwo = new BigDecimal(getAfterOpValue());
 
@@ -105,7 +105,7 @@ public class MainViewModel extends ViewModel {
                     updateDisplay(result.toString());
                     resetForNextCalc();
 
-                } else if (currentOperator == "x") {
+                } else if (currentOperator.equals("x")) {
                     BigDecimal numOne = new BigDecimal(getBeforeOpValue());
                     BigDecimal numTwo = new BigDecimal(getAfterOpValue());
 
@@ -120,7 +120,7 @@ public class MainViewModel extends ViewModel {
             }
 
         }
-        if (input == "⌫") {
+        if (input.equals("⌫")) {
             resetForNextCalc();
             displayString.setValue("0");
         }
